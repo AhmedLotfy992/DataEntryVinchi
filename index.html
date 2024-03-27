@@ -315,27 +315,21 @@
 
         // Collect the form data
         var formData = new FormData(this);
-        console.log(formData+"                       ");
         var keyValuePairs = [];
         for (var pair of formData.entries()) {
-          console.log(pair[0] + "=" + pair[1])
           keyValuePairs.push(pair[0] + "=" + pair[1]);
         }
 
         var formDataString = keyValuePairs.join("&");
-        console.log(formDataString);
+        
         // Send a POST request to your Google Apps Script
-        fetch(
-          "https://script.google.com/macros/s/AKfycbwxnVifjW86v7AvRGOxGh3yM7ACUhonsZWv5ayBq9M3erIxjVeE9lLE_czCYqcJWbkgnQ/exec",
-          {
-            redirect: "follow",
-            method: "POST",
-            body: formDataString,
-            headers: {
-              "Content-Type": "text/plain;charset=utf-8",
+        fetch("https://script.google.com/macros/s/AKfycbyPyjaujFQDUmG372B7DzR_8Y5jQyCOdl9ZARWO2e8XxNtgz7XYVolDPzqA4N8IQSFikw/exec", {
+          method: "POST",
+          headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
             },
-          }
-        )
+          body: formDataString,
+        })
           .then(function (response) {
             // Check if the request was successful
             if (response) {
@@ -361,10 +355,12 @@
           })
           .catch(function (error) {
             // Handle errors, you can display an error message here
-            console.error(error);
+            console.error('Submission failed:', error);
             document.getElementById("message").textContent =
               "An error occurred while submitting the form.";
             document.getElementById("message").style.display = "block";
+
+            fetch("https://script.google.com/macros/s/AKfycbyPyjaujFQDUmG372B7DzR_8Y5jQyCOdl9ZARWO2e8XxNtgz7XYVolDPzqA4N8IQSFikw/exec?action=sendErrorEmail&message=" + encodeURIComponent(error.message));
           });
       });
 
