@@ -320,10 +320,10 @@
         e.preventDefault(); // Prevent the default form submission
         var isPhoneNumberValid = validateInput('phoneNumber');
         var isSkuValid = validateInput('SKU');
-        var isCustomerNameValid = validateCustomerName();
+        
 
 
-        if (!isPhoneNumberValid || !isSkuValid || !isCustomerNameValid) {
+        if (!isPhoneNumberValid || !isSkuValid) {
             e.preventDefault();
             if(!isPhoneNumberValid){
               document.getElementById("message").textContent = "Submission failed: Invalid phone number...."; 
@@ -331,11 +331,6 @@
 
             if(!isSkuValid){
               document.getElementById("message").textContent = "Submission failed: Invalid SKU.....";
-            }
-
-
-            if(!isCustomerNameValid){
-              document.getElementById("message").textContent = "Submission failed: Invalid Customer Name.....";
             }
             
             document.getElementById("message").style.display = "block";
@@ -360,7 +355,7 @@
         var formDataString = keyValuePairs.join("&");
         
         // Send a POST request to your Google Apps Script
-        fetch("https://script.google.com/macros/s/AKfycbxhUFWAaZT8O8h5hA2ZMS7PHsySajDhi_5oFIuHu5fPhotAzX99_tVKZMZ4KvoKT8op1w/exec", {
+        fetch("https://script.google.com/macros/s/AKfycbw2Oh94RWS9kgz20uV5GenWYOWUWcWL2Ngx_LnuWassajO5m4X9vvnL2bwnFruT2KJz2w/exec", {
           method: "POST",
           headers: {
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -429,23 +424,6 @@
         }
 
         return isValid;
-    }
-
-
-    function validateCustomerName() {
-       var inputElement = document.getElementById("customer Name");
-      var errorMessageElement = document.getElementById("customerNameErrorMessage");
-      var namePattern = /^[A-Za-z\s]+$/; // Regex for only letters and spaces
-      var isValid = namePattern.test(inputElement.value);
-
-      if (isValid) {
-        errorMessageElement.textContent = "";
-      } else {
-        errorMessageElement.textContent = "Invalid name. Please enter text only.";
-      }
-
-      return isValid;
-    
     }
 
 
