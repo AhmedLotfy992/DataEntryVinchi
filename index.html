@@ -100,7 +100,7 @@
             name="QNT"
             value="1"
             required
-            disabled
+            readonly
           />
         </div>
       </div>
@@ -151,7 +151,7 @@
             placeholder="Name Of Order placer"
             name="customer Name"
             required
-            oninput="validateCustomerName()"
+            
             />
            <p id="customerNameErrorMessage" style="color: red;"></p>
           
@@ -339,7 +339,7 @@
             return; // Stop further execution
         }else{
 
-        document.getElementById("message").textContent = "Submitting..";
+        document.getElementById("message").textContent = "Submitting ..";
         document.getElementById("message").style.backgroundColor = "green";
         document.getElementById("message").style.display = "block";
         document.getElementById("submit-button").disabled = true;
@@ -353,6 +353,7 @@
         }
 
         var formDataString = keyValuePairs.join("&");
+        console.log(formDataString);
         
         // Send a POST request to your Google Apps Script
         fetch("https://script.google.com/macros/s/AKfycbw2Oh94RWS9kgz20uV5GenWYOWUWcWL2Ngx_LnuWassajO5m4X9vvnL2bwnFruT2KJz2w/exec", {
