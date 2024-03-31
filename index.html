@@ -7,7 +7,16 @@
     />
     <style>
       .white-datepicker-icon::-webkit-calendar-picker-indicator {
-          filter: invert(1); /* Inverts the color */ 
+          filter: invert(0.1); /* Inverts the color for light mode */ 
+      }
+
+      /* Dark mode styles */
+      @media (prefers-color-scheme: dark) {
+          .white-datepicker-icon::-webkit-calendar-picker-indicator {
+              filter: invert(1); /* Different filter for dark mode */
+              /* Add additional styling for dark mode here */
+          }
+
       }
   </style>
     
